@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//SoftQuad Software//DTD HoTMetaL PRO 6.0::19990601::extensions to HTML 4.0//EN" "hmpro6.dtd">
+<HTML> 
+  <HEAD> 
+	 <TITLE>Bible Thoughts - Bibliomancy</TITLE> 
+  </HEAD> 
+  <BODY STYLE="font-family: Arial"> <SCRIPT SRC="cookie.js"></SCRIPT> 
+<!--#include virtual= '/header.html' -->
+	 <H3>Bible Thoughts - Bibliomancy</H3> 
+	 <P>The Bible is a series of 66 Books written by many wise men over a period
+		of many centuries. <BR>Many believe it reveals the path to eternal salvation.
+		<BR>Whether you believe this or not, the Bible certainly contains many
+		inspirational stories. <BR>Our Bibliomancy Readings are based on your date of
+		birth. A unique Bible phrase is selected for each day of your life. (The whole
+		chapter will be included to give the verse context)</P> 
+	 <P>Focus on your main concern for today. Interpret the Bible verse in light
+		of your concern. You will find enlightenment and guidance within this
+		process.</P> 
+	 <P></P> 
+	 <FORM NAME="Form" ACTION="te.cgi" METHOD="POST" TARGET="_blank"> 
+		<P>Day you were born: 
+		  <SELECT NAME="bday" SIZE="1"> 
+			 <OPTION VALUE="1">1</OPTION> 
+			 <OPTION VALUE="2">2</OPTION> 
+			 <OPTION VALUE="3">3</OPTION> 
+			 <OPTION VALUE="4">4</OPTION> 
+			 <OPTION VALUE="5">5</OPTION> 
+			 <OPTION VALUE="6">6</OPTION> 
+			 <OPTION VALUE="7">7</OPTION> 
+			 <OPTION VALUE="8">8</OPTION> 
+			 <OPTION VALUE="9">9</OPTION> 
+			 <OPTION VALUE="10">10</OPTION> 
+			 <OPTION VALUE="11">11</OPTION> 
+			 <OPTION VALUE="12">12</OPTION> 
+			 <OPTION VALUE="13">13</OPTION> 
+			 <OPTION VALUE="14">14</OPTION> 
+			 <OPTION VALUE="15">15</OPTION> 
+			 <OPTION VALUE="16">16</OPTION> 
+			 <OPTION VALUE="17">17</OPTION> 
+			 <OPTION VALUE="18">18</OPTION> 
+			 <OPTION VALUE="19">19</OPTION> 
+			 <OPTION VALUE="20">20</OPTION> 
+			 <OPTION VALUE="21">21</OPTION> 
+			 <OPTION VALUE="22">22</OPTION> 
+			 <OPTION VALUE="23">23</OPTION> 
+			 <OPTION VALUE="24">24</OPTION> 
+			 <OPTION VALUE="25">25</OPTION> 
+			 <OPTION VALUE="26">26</OPTION> 
+			 <OPTION VALUE="27">27</OPTION> 
+			 <OPTION VALUE="28">28</OPTION> 
+			 <OPTION VALUE="29">29</OPTION> 
+			 <OPTION VALUE="30">30</OPTION> 
+			 <OPTION VALUE="31">31</OPTION> 
+		  </SELECT> 
+		  <SELECT NAME="bmonth" SIZE="1"> 
+			 <OPTION VALUE="Jan">Jan</OPTION> 
+			 <OPTION VALUE="Feb">Feb</OPTION> 
+			 <OPTION VALUE="Mar">Mar</OPTION> 
+			 <OPTION VALUE="Apr">Apr</OPTION> 
+			 <OPTION VALUE="May">May</OPTION> 
+			 <OPTION VALUE="Jun">Jun</OPTION> 
+			 <OPTION VALUE="Jul">Jul</OPTION> 
+			 <OPTION VALUE="Aug">Aug</OPTION> 
+			 <OPTION VALUE="Sep">Sep</OPTION> 
+			 <OPTION VALUE="Oct">Oct</OPTION> 
+			 <OPTION VALUE="Nov">Nov</OPTION> 
+			 <OPTION VALUE="Dec">Dec</OPTION> 
+		  </SELECT><INPUT TYPE="TEXT" NAME="byear" SIZE="10" VALUE="1970"></P> 
+		<P> 
+		  <SELECT NAME="reference" SIZE="1">
+			 <OPTION VALUE="references/kjv.txt" SELECTED="SELECTED">Bible -
+				KJV</OPTION>
+			 <OPTION VALUE="references/asv.txt">Bible - ASV</OPTION>
+			 <OPTION VALUE="references/bbe.txt">Bible - Bible in Basic
+				English</OPTION>
+			 <OPTION VALUE="references/darby.txt">Bible - Darby</OPTION>
+			 <OPTION VALUE="references/webster.txt">Bible - Webster</OPTION>
+			 <OPTION VALUE="references/ylt.txt">Bible - YLT</OPTION>
+ <OPTION VALUE="references/koran.txt">The Koran</OPTION>
+			 <OPTION VALUE="references/mobydick.txt">Novel - Moby Dick</OPTION>
+		  </SELECT></P> 
+		<P>Email: <INPUT NAME="email" TYPE="text"></P> 
+		<P><INPUT TYPE="SUBMIT" NAME="submit"
+		  VALUE="Get todays Bible verse"></P></FORM> <SCRIPT>
+document.Form.bday.value = getCookie('bday') || '1';
+document.Form.bmonth.value = getCookie('bmonth') || 'Jan';
+document.Form.byear.value = getCookie('byear') || '1970';
+document.Form.email.value = getCookie('email') || '';
+document.Form.reference.value = getCookie('reference') || 'references/kjv.txt';
+</SCRIPT>
+		
+	<!--#include virtual= '/footer.html' -->
+  </BODY>
+</HTML>

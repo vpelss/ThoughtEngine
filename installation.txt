@@ -1,0 +1,84 @@
+------------------------------------------------
+Thanks
+------------------------------------------------
+
+Thank you for purchasing our Thought Engine script.
+
+Thought Engine allows you to take properly formatted text, and feed a unique thought/sentence from the text to your visitors based on how old they are. (How many days it is from their date of birth)
+The Thought Engine script also allows you to easily modify how the text is displayed.
+The Thought Engine script was originally written for the Bible (Bibliomancy), but it can use any text as long as it is formatted properly.
+Email Biliomancy option!
+
+------------------------------------------------
+Installation
+------------------------------------------------
+
+First modify settings you may want to change in the 'vars.cgi' file.
+
+To install, simply FTP the 'thoughtengine' folder and contents to your sites 'cgi' folder in ASCII. 
+
+Set permissions on the 'te.cgi' file to 755
+
+Now direct your users to the /cgi/thoughtengine/ folder on your site.
+
+------------------------------------------------
+Creating your own texts and templates
+------------------------------------------------
+
+NOTE: Your text must be under a million lines!
+
+The text files should be placed in the 'references' folder. The calling FORM in index.shtml will reference the new text at references/your.txt. Examine the index.shtml file for examples.
+
+The text must be in the following format(s):
+
+The first line in the text MUST be the path, relative to the te.cgi script, to the template file to be used. 
+
+The second line is the series of  field names delimited (separated) by the '|' (pipe) character. The valid field names are Book, Chapter, Verse, and Sentence. The only manditory one is Sentence.
+
+The rest of the lines are the book's text. It must be in the same format as the field names in the second line. It is very important that only one sentence (or grouping you decide on) exists per line.
+
+Examples:
+
+templates/bible.html
+Book|Chapter|Verse|Sentence
+Genesis|1|1|In the beginning God created the heaven and the earth.
+Genesis|1|2|And the earth was without form, and void; and darkness was upon the face of the deep. And the Spirit of God moved upon the face of the waters.
+Genesis|1|3|And God said, Let there be light: and there was light.
+
+or 
+
+templates/novel.html
+Sentence
+Call me Ishmael.
+Some years ago--never mind how long precisely--having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world.
+It is a way I have of driving off the spleen and regulating the circulation.
+Whenever I find myself growing grim about the mouth; whenever it is a damp, drizzly November in my soul; whenever I find myself involuntarily pausing before coffin warehouses, and bringing up the rear of every funeral I meet; and especially whenever my hypos get such an upper hand of me, that it requires a strong moral principle to prevent me from deliberately stepping into the street, and methodically knocking people's hats off--then, I account it high time to get to sea as soon as I can.
+
+The template (HTML) for this text, pointed to by the first line, will allow you to easily modify the look and ouput of the te.cgi script.
+
+All HTML tags are valid in the template. 
+
+The following additional  tokens are added for your convenience.
+
+<%todaysdate%> - this displays todays date
+<%book%> - this will display the selected line's book field value if it exists
+<%chapter%> - this will display the selected line's chapter field value if it exists
+<%verse%> - this will display the selected line's verse field value if it exists
+<%sentence%>  - this will display the selected line's sentence field value if it exists
+<%s%>  - this will display the first letter of the selected line's sentence field value if it exists
+<%entence%> - this will display everything but the first letter of the selected line's sentence field value if it exists
+<%sentencebefore%> - same as <%sentence%> but using the previous sentence in the text
+<%sbefore%> - same as <%s%> but using the previous sentence in the text
+<%entencebefore%> - same as <%entence%> but using the previous sentence in the text
+<%sentenceafter%> - same as <%sentence%> but using the next sentence in the text
+<%safter%> - same as <%s%> but using the next sentence in the text
+<%entenceafter%> - same as <%entence%> but using the next sentence in the text
+
+By surounding the above tokens with a <lineformat></lineformat> tag, you can display all the texts marked by the same 'chapter' field.
+Note: This will only work if you hav a corresponding 'chapter' field in your text!
+eg:
+<lineformat><%book%> <%chapter%><%verse%> <%s%><%entence%></lineformat>
+
+See the templates in the 'templates' folder for examples.
+
+If you require a text to be converted to the required format, and you cannot do it yourself, contact myself at vpelss@emogic.com

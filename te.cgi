@@ -54,7 +54,7 @@ foreach $item (@fields)
          $count ++;
          }
 
-$lines = scalar(@lines) - 1; # number of lines
+$number_of_lines = scalar(@lines) - 1; # number of lines
 
 #calculate days since birthday
 $btime = &date_to_unix("$bday-$bmonth-$byear");
@@ -63,32 +63,37 @@ $sectobd = $today - $btime;
 $daytobd = int($sectobd/60/60/24);
 
 #read primes up to 1,000,000
-open (DATA, "<primes.txt") or die("Primes.txt file does not exist");
-@primes = <DATA>;
-close (DATA);
+#open (DATA, "<primes.txt") or die("Primes.txt file does not exist");
+#@primes = <DATA>;
+#close (DATA);
 
-#fina the prime greater than the number of lines
-foreach $item (@primes)
-         {
-         if ($item > $lines)
-              {
-              $prime = $item;
-              last;
-              }
-         }
+#find the prime greater than the number of lines
+#foreach $item (@primes)
+ #        {
+  #       if ($item > $lines)
+   #           {
+    #          $prime = $item;
+     #         last;
+      #        }
+       #  }
 
 #map $daytobd to one of lines of the reference test
 
 #$prime = 31121; #prime just under 100 years worth of days
 #31091 31121  36497
 
-$magicnumber = 10; #divides bible into equal parts and gives it it's randomness
-$steps = int($lines) / $magicnumber; #steps # of lines / $magicnumber
+#$magicnumber = 10; #divides bible into equal parts and gives it it's randomness
+#$steps = int($lines) / $magicnumber; #steps # of lines / $magicnumber
 
-$remainder = ($daytobd * $steps) % $prime; #find a line number based on thye remander
-if ($remainder > $lines) {$remainder = $remainder - $lines} #loop in cases between numberoflines and prime number
+#$remainder = ($daytobd * $steps) % $prime; #find a line number based on thye remander
+#if ($remainder > $lines) {$remainder = $remainder - $lines} #loop in cases between numberoflines and prime number
 
-$line = $lines[$remainder];
+#your age in days selects for the line read
+srand(daytobd); 
+$todays_line = rand(number_of_lines);
+
+#$line = $lines[$remainder];
+$line = $lines[$todays_line];
 $line =~ s/\n//g; #remove line return
 
 @line = split(/\|/,$line);

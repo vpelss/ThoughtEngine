@@ -88,9 +88,9 @@ $daytobd = int($sectobd/60/60/24);
 #$remainder = ($daytobd * $steps) % $prime; #find a line number based on thye remander
 #if ($remainder > $lines) {$remainder = $remainder - $lines} #loop in cases between numberoflines and prime number
 
-#your age in days selects for the line read
-srand(daytobd); 
-$todays_line = rand(number_of_lines);
+#your age in days selects which line is read
+srand($daytobd); 
+$todays_line = int(rand($number_of_lines));
 
 #$line = $lines[$remainder];
 $line = $lines[$todays_line];

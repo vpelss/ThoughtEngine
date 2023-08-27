@@ -28,7 +28,8 @@ if ($in{bday}) {$bday = $in{bday}}
 if ($in{bmonth}) {$bmonth = $in{bmonth}}
 if ($in{byear}) {$byear = $in{byear}}
 
-$referencepath = $in{reference};
+#$referencepath = $in{reference}; #no more choice, security issues
+$referencepath = 'references/kjv.txt';
 
 #read bible
 open (DATA, "<$referencepath") or die("Reference file $reference does not exist");
@@ -57,10 +58,14 @@ foreach $item (@fields)
 $number_of_lines = scalar(@lines) - 1; # number of lines
 
 #calculate days since birthday
-$btime = &date_to_unix("$bday-$bmonth-$byear");
+#$btime = &date_to_unix("$bday-$bmonth-$byear");
+#$today = time();
+#$sectobd = $today - $btime;
+#$daytobd = int($sectobd/60/60/24);
+
+#days since epoch
 $today = time();
-$sectobd = $today - $btime;
-$daytobd = int($sectobd/60/60/24);
+$days = int($today/60/60/24);
 
 #read primes up to 1,000,000
 #open (DATA, "<primes.txt") or die("Primes.txt file does not exist");
@@ -89,7 +94,7 @@ $daytobd = int($sectobd/60/60/24);
 #if ($remainder > $lines) {$remainder = $remainder - $lines} #loop in cases between numberoflines and prime number
 
 #your age in days selects which line is read
-srand($daytobd); 
+srand($days); 
 $todays_line = int(rand($number_of_lines));
 
 #$line = $lines[$remainder];

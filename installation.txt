@@ -25,10 +25,6 @@ Now direct your users to the /cgi/thoughtengine/ folder on your site.
 Creating your own texts and templates
 ------------------------------------------------
 
-NOTE: Your text must be under a million lines!
-
-The text files should be placed in the 'references' folder. The calling FORM in index.shtml will reference the new text at references/your.txt. Examine the index.shtml file for examples.
-
 The text must be in the following format(s):
 
 The first line in the text MUST be the path, relative to the te.cgi script, to the template file to be used. 

@@ -1,34 +1,12 @@
 #!/usr/bin/perl
 
-use CGI::Cookie;
-
-eval {
-      require "vars.cgi";  #load up common variables and routines. // &cgierr
-      };
-warn $@ if $@;
-
-if ($@)
-   {
-    print "Content-type: text/plain\n\n";
-    print "Error including libraries: $@\n";
-    print "Make sure they exist, permissions are set properly, and paths are set correctly.";
-    exit;
-    }
-
-eval { &main; };                            # Trap any fatal errors so the program hopefully
-if ($@) { &cgierr("fatal error: $@"); }     # never produces that nasty 500 server error page.
+&main;                          
 exit;   # There are only two exit calls in the script, here and in in &cgierr.
 
 sub main
 {
 my $todaysdate = &unix_to_date(time);
 
-%in = &parse_form; #get input arguments
-if ($in{bday}) {$bday = $in{bday}}
-if ($in{bmonth}) {$bmonth = $in{bmonth}}
-if ($in{byear}) {$byear = $in{byear}}
-
-#$referencepath = $in{reference}; #no more choice, security issues
 $referencepath = 'references/kjv.txt';
 
 #read bible
@@ -57,43 +35,11 @@ foreach $item (@fields)
 
 $number_of_lines = scalar(@lines) - 1; # number of lines
 
-#calculate days since birthday
-#$btime = &date_to_unix("$bday-$bmonth-$byear");
-#$today = time();
-#$sectobd = $today - $btime;
-#$daytobd = int($sectobd/60/60/24);
-
 #days since epoch
 $today = time();
 $days = int($today/60/60/24);
 
-#read primes up to 1,000,000
-#open (DATA, "<primes.txt") or die("Primes.txt file does not exist");
-#@primes = <DATA>;
-#close (DATA);
-
-#find the prime greater than the number of lines
-#foreach $item (@primes)
- #        {
-  #       if ($item > $lines)
-   #           {
-    #          $prime = $item;
-     #         last;
-      #        }
-       #  }
-
-#map $daytobd to one of lines of the reference test
-
-#$prime = 31121; #prime just under 100 years worth of days
-#31091 31121  36497
-
-#$magicnumber = 10; #divides bible into equal parts and gives it it's randomness
-#$steps = int($lines) / $magicnumber; #steps # of lines / $magicnumber
-
-#$remainder = ($daytobd * $steps) % $prime; #find a line number based on thye remander
-#if ($remainder > $lines) {$remainder = $remainder - $lines} #loop in cases between numberoflines and prime number
-
-#your age in days selects which line is read
+#days since epoch selects which line is read
 srand($days); 
 $todays_line = int(rand($number_of_lines));
 
@@ -204,58 +150,9 @@ $template =~ s/<\%sentenceafter\%>/$sentenceafter/g;
 $template =~ s/<\%safter\%>/$safter/g;
 $template =~ s/<\%entenceafter\%>/$entenceafter/g;
 
-#print page starting with cookies
-#Sat, 19-Jan-2008 05:00:00 GMT
-$formatedexpires = "Mon, 24-Jun-2030 05:00:00 GMT";
-my $c = new CGI::Cookie(-name    =>  "bday",
-                          -value   =>  "$bday",
-                          -expires =>  $formatedexpires
-                          );
-print "Set-Cookie: $c\n";
-$c = new CGI::Cookie(-name    =>  "bmonth",
-                          -value   =>  "$bmonth",
-                          -expires =>  $formatedexpires
-                          );
-print "Set-Cookie: $c\n";
-$c = new CGI::Cookie(-name    =>  "byear",
-                          -value   =>  "$byear",
-                          -expires =>  $formatedexpires
-                          );
-print "Set-Cookie: $c\n";
-$c = new CGI::Cookie(-name    =>  "email",
-                          -value   =>  "$in{email}",
-                          -expires =>  $formatedexpires
-                          );
-print "Set-Cookie: $c\n";
-$c = new CGI::Cookie(-name    =>  "reference",
-                          -value   =>  "$in{reference}",
-                          -expires =>  $formatedexpires
-                          );
-print "Set-Cookie: $c\n";
-$c = new CGI::Cookie(-name    =>  "template",
-                          -value   =>  "$in{template}",
-                          -expires =>  $formatedexpires
-                          );
-print "Set-Cookie: $c\n";
-
 print "Content-type:text/html\n\n";
 
 print $template;
-
-#open file to archive questions
-$filename = "archive.txt";
-open (QARCHIVE, ">>$filename") or die ("Can't open $filename");
-print QARCHIVE "$ENV{'REMOTE_ADDR'} $in{'email'};\n";
-close QARCHIVE;
-
-if ($in{email})
-    {
-    if (&valid_address($in{email}))
-        {
-        $mailresult = &sendmail($from , $from , $in{'email'}, $SMTP_SERVER, "$subject", $template);
-        if ($mailresult ne "1") {die("MAIL NOT SENT. SMTP ERROR: $mailcodes{'$mailresult'}<br>Sendmail: $SEND_MAIL or SMTP Server: $SMTP_SERVER @mailloc\n<br><$sendmail>")}
-        }
-    }
 
 print "\n";
 };
